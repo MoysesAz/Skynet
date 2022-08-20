@@ -14,21 +14,25 @@ class PublishController: UIViewController {
     
     lazy var textFieldPost: UITextView = {
         let textFieldPost = UITextView(frame: CGRect())
-        textFieldPost.backgroundColor = .white
+        textFieldPost.backgroundColor = .black
 //        textFieldPost.placeholder = "Comente aqui!"
+        textFieldPost.layer.borderWidth = 1
+        textFieldPost.layer.cornerRadius = view.frame.height*0.05 / 2
+        textFieldPost.layer.borderColor = UIColor.white.cgColor
+        textFieldPost.textColor = .white
         textFieldPost.translatesAutoresizingMaskIntoConstraints = false
         return textFieldPost
     }()
 
-    lazy var buttonSent: UIButton = {
-        let buttonSent = UIButton(type: .system)
-        buttonSent.backgroundColor = .blue
-        buttonSent.translatesAutoresizingMaskIntoConstraints = false
-        buttonSent.setTitle("Send", for: .normal)
-        buttonSent.titleLabel?.font = UIFont.systemFont(ofSize: 25)
-        buttonSent.setTitleColor(.white, for: .normal)
-        buttonSent.addTarget(self, action: #selector(publish), for: .touchUpInside)
-        return buttonSent
+    lazy var buttonSend: UIButton = {
+        let buttonSend = UIButton(type: .system)
+        buttonSend.backgroundColor = .systemPink
+        buttonSend.translatesAutoresizingMaskIntoConstraints = false
+        buttonSend.setTitle("Send", for: .normal)
+        buttonSend.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+        buttonSend.setTitleColor(.white, for: .normal)
+        buttonSend.addTarget(self, action: #selector(publish), for: .touchUpInside)
+        return buttonSend
     }()
 
 
@@ -37,8 +41,10 @@ class PublishController: UIViewController {
         super.viewDidLoad()
 //        view.backgroundColor = .green
         self.title = "Publish"
+        self.view.backgroundColor = .black
         view.addSubview(textFieldPost)
-        view.addSubview(buttonSent)
+        view.addSubview(buttonSend)
+        buttonSend.layer.cornerRadius = view.frame.height*0.06 / 2
 
 
         NSLayoutConstraint.activate([
@@ -49,12 +55,12 @@ class PublishController: UIViewController {
             textFieldPost.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
 
 
-            buttonSent.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
-            buttonSent.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 340),
+            buttonSend.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+            buttonSend.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 340),
 
-            buttonSent.heightAnchor.constraint(equalTo: view.heightAnchor,
-                                                   multiplier: 0.05),
-            buttonSent.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            buttonSend.heightAnchor.constraint(equalTo: view.heightAnchor,
+                                                   multiplier: 0.06),
+            buttonSend.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
 
 
         ])
