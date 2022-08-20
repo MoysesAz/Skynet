@@ -86,7 +86,6 @@ class Apresentation: UIViewController {
             imageEyes.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25),
         ])
         // pq mesmo view.widthAnchor = 100 porcento nao consigo colocar o tamanho de 100 porcento largura?
-
     }
 
     func setConstraintsLabelSalutation() {

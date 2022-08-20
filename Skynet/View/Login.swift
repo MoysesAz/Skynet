@@ -12,30 +12,54 @@ import UIKit
 class LoginController: UIViewController {
     let userViewModel = UserViewModel()
     var loginError = false
+
+    lazy var logo: UIImageView = {
+        let eyes = UIImage(named: "Logo")
+        let imageEyes = UIImageView(image: eyes)
+        imageEyes.image = eyes
+        imageEyes.frame = CGRect()
+        imageEyes.contentMode = .scaleAspectFill
+        imageEyes.translatesAutoresizingMaskIntoConstraints = false
+        return imageEyes
+    }()
     
     lazy var textFieldEmail: UITextField = {
         let textFieldEmail = UITextField(frame: CGRect())
         textFieldEmail.borderStyle = .line
-        textFieldEmail.backgroundColor = .white
-        textFieldEmail.text = "m.mirazev@gmail.com"
-        textFieldEmail.placeholder = "Email"
+        textFieldEmail.layer.borderWidth = 1
+        textFieldEmail.layer.cornerRadius = view.frame.height*0.05 / 2
+        textFieldEmail.setLeftPaddingPoints(10)
+
+
+        textFieldEmail.layer.borderColor = UIColor.white.cgColor
+        textFieldEmail.textColor = .white
+        textFieldEmail.backgroundColor = .clear
+//        textFieldEmail.text = "m.mirazev@gmail.com"
+        textFieldEmail.attributedPlaceholder = NSAttributedString(
+            string: "Email",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
+        )
         textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
         return textFieldEmail
     }()
     
     lazy var textFieldPassword: UITextField = {
-        let textFieldEmail = UITextField(frame: CGRect())
-        textFieldEmail.borderStyle = .line
-        textFieldEmail.backgroundColor = .white
-        textFieldEmail.text = "senha123"
-        textFieldEmail.placeholder = "Password"
-        textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
-        return textFieldEmail
+        let textFieldPassword = UITextField(frame: CGRect())
+        textFieldPassword.borderStyle = .line
+        textFieldPassword.setLeftPaddingPoints(10)
+        textFieldPassword.layer.borderWidth = 1
+        textFieldPassword.layer.cornerRadius = view.frame.height*0.05 / 2
+        textFieldPassword.layer.borderColor = UIColor.white.cgColor
+        textFieldPassword.textColor = .white
+        textFieldPassword.text = "senha123"
+        textFieldPassword.placeholder = "Password"
+        textFieldPassword.translatesAutoresizingMaskIntoConstraints = false
+        return textFieldPassword
     }()
     
     lazy var buttonLogin: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .blue
+        button.backgroundColor = .systemPink
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Login", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
@@ -46,7 +70,7 @@ class LoginController: UIViewController {
     
     lazy var buttonRegistration: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .blue
+        button.backgroundColor = .systemPink
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Cadastrar", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
@@ -74,57 +98,63 @@ class LoginController: UIViewController {
         }
         self.present(apresentationController, animated: true)
 
-        view.backgroundColor = .white
+        view.addSubview(logo)
         view.addSubview(textFieldEmail)
         view.addSubview(textFieldPassword)
         view.addSubview(buttonLogin)
         view.addSubview(buttonRegistration)
+        buttonLogin.layer.cornerRadius = view.frame.height*0.06 / 2
+        buttonRegistration.layer.cornerRadius = view.frame.height*0.06 / 2
         setConstraints()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.backgroundColor = .white
-        view.addSubview(textFieldEmail)
-        view.addSubview(textFieldPassword)
-        view.addSubview(buttonLogin)
-        view.addSubview(buttonRegistration)
-        setConstraints()
+        view.backgroundColor = .black
     }
     
     func setConstraints(){
+        setConstraintsLogo()
         setConstraintsTextFieldEmail()
         setConstraintsTextFieldPassword()
         setConstraintsButtonLogin()
         setConstraintsButtonRegistration()
     }
 
+    func setConstraintsLogo() {
+        NSLayoutConstraint.activate([
+            logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logo.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -view.frame.height / 4),
+            logo.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
+            logo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+        ])
+    }
     func setConstraintsTextFieldEmail() {
         NSLayoutConstraint.activate([
             textFieldEmail.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
-            textFieldEmail.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -160),
+            textFieldEmail.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -view.frame.height/6),
             textFieldEmail.heightAnchor.constraint(equalTo: view.heightAnchor,
                                                    multiplier: 0.05),
-            textFieldEmail.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            textFieldEmail.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
         ])
     }
 
     func setConstraintsTextFieldPassword() {
         NSLayoutConstraint.activate([
             textFieldPassword.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
-            textFieldPassword.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
+            textFieldPassword.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -view.frame.height/10),
             textFieldPassword.heightAnchor.constraint(equalTo: view.heightAnchor,
                                                       multiplier: 0.05),
-            textFieldPassword.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            textFieldPassword.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
         ])
     }
 
     func setConstraintsButtonLogin() {
         NSLayoutConstraint.activate([
-            buttonLogin.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+            buttonLogin.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonLogin.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20),
             buttonLogin.heightAnchor.constraint(equalTo: view.heightAnchor,
-                                                multiplier: 0.05),
+                                                multiplier: 0.06),
             buttonLogin.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
         ])
     }
@@ -132,9 +162,9 @@ class LoginController: UIViewController {
     func setConstraintsButtonRegistration() {
         NSLayoutConstraint.activate([
             buttonRegistration.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
-            buttonRegistration.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 40),
+            buttonRegistration.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60),
             buttonRegistration.heightAnchor.constraint(equalTo: view.heightAnchor,
-                                                       multiplier: 0.05),
+                                                       multiplier: 0.06),
             buttonRegistration.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
         ])
         
@@ -182,3 +212,16 @@ class LoginController: UIViewController {
 }
 
 
+
+extension UITextField {
+    func setLeftPaddingPoints(_ amount:CGFloat){
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+        self.leftView = paddingView
+        self.leftViewMode = .always
+    }
+    func setRightPaddingPoints(_ amount:CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+        self.rightView = paddingView
+        self.rightViewMode = .always
+    }
+}
