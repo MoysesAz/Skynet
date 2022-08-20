@@ -72,7 +72,7 @@ class LoginController: UIViewController {
         if let sheet = apresentationController.sheetPresentationController{
             sheet.detents = [.large()]
         }
-//        self.present(apresentationController, animated: true)
+        self.present(apresentationController, animated: true)
 
         view.backgroundColor = .white
         view.addSubview(textFieldEmail)
