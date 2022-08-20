@@ -58,9 +58,13 @@ class Apresentation: UIViewController {
         view.addSubview(labelSalutation)
         view.addSubview(labelSubSalutation)
         view.addSubview(buttonGetStarted)
-
+        print(buttonGetStarted.frame.width)
+        buttonGetStarted.layer.cornerRadius = view.frame.height*0.08 / 2
+        // pq tenho que declarar cornerRadius no view did Load nao na construçao da viewUi
+        // pq quando seto uma constraint em um uielementobutton ele nao tem .frame.width
         setConstraints()
-        
+        print(buttonGetStarted.frame.width)
+
     }
 
     @objc func getStarted(){
