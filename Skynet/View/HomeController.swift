@@ -9,15 +9,9 @@ import Foundation
 import UIKit
 
 class CellPost: UICollectionViewCell {
-    lazy var view: UIView = {
-        let view = UILabel(frame: CGRect())
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
     lazy var labelName: UILabel = {
-        let labelName = UILabel(frame: CGRect())
-        labelName.text = "@Laís"
+        let labelName = UILabel()
+        labelName.textColor = .white
         labelName.textAlignment = NSTextAlignment.center;
         labelName.translatesAutoresizingMaskIntoConstraints = false
         return labelName
@@ -25,7 +19,7 @@ class CellPost: UICollectionViewCell {
     
     lazy var labelHours: UILabel = {
         let labelHours = UILabel(frame: CGRect())
-        labelHours.text = "Qui 18 de ago. 2022"
+        labelHours.textColor = .white
         labelHours.textAlignment = NSTextAlignment.center;
         labelHours.translatesAutoresizingMaskIntoConstraints = false
         return labelHours
@@ -33,7 +27,7 @@ class CellPost: UICollectionViewCell {
     
     lazy var labelPost: UILabel = {
         let labelPost = UILabel(frame: CGRect())
-        labelPost.text = "Post"
+        labelPost.textColor = .white
         labelPost.textAlignment = NSTextAlignment.center;
         labelPost.translatesAutoresizingMaskIntoConstraints = false
         return labelPost
@@ -52,8 +46,11 @@ class CellPost: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+//        textFieldEmail.borderStyle = .line
+//        textFieldEmail.layer.borderWidth = 1
+//        textFieldEmail.layer.cornerRadius = view.frame.height*0.05 / 2
         self.layer.borderWidth = 1
-        self.layer.cornerRadius = 7
+        self.layer.cornerRadius =  self.frame.height * 0.1
         self.layer.borderColor = UIColor(red:255, green:255, blue:255, alpha: 1).cgColor
         addSubview(labelName)
         addSubview(labelHours)
@@ -70,7 +67,7 @@ class CellPost: UICollectionViewCell {
     func setConstraintsLabelName(){
         NSLayoutConstraint.activate(
             [
-                labelName.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -self.frame.width/2.5),
+                labelName.leadingAnchor.constraint(equalTo: self.leadingAnchor),
                 labelName.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -self.frame.height/2.5),
                 labelName.heightAnchor.constraint(equalTo: self.heightAnchor,
                                                   multiplier: 0.8),
@@ -82,7 +79,7 @@ class CellPost: UICollectionViewCell {
     func setConstraintsLabelHours(){
         NSLayoutConstraint.activate(
             [
-                labelHours.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: self.frame.width/2.5),
+                labelHours.trailingAnchor.constraint(equalTo: self.trailingAnchor),
                 labelHours.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: self.frame.height/2.5),
                 labelHours.heightAnchor.constraint(equalTo: self.heightAnchor,
                                                    multiplier: 0.1),
@@ -119,12 +116,13 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     lazy var collectionViewPosts: UICollectionView = {
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         // margens cell
         layout.itemSize = CGSize(width: self.view.frame.width * 0.9, height: self.view.frame.height * 0.2)
         // tamanho da celula
         
         let collectionViewPosts: UICollectionView  = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionViewPosts.backgroundColor = .black
         collectionViewPosts.dataSource = self
         collectionViewPosts.delegate = self
         collectionViewPosts.register(CellPost.self, forCellWithReuseIdentifier: "collectionViewPosts")
@@ -147,7 +145,6 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
         self.title = "Home"
     }
 
