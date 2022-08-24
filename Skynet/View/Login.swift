@@ -34,7 +34,7 @@ class LoginController: UIViewController {
         textFieldEmail.layer.borderColor = UIColor.white.cgColor
         textFieldEmail.textColor = .white
         textFieldEmail.backgroundColor = .clear
-//        textFieldEmail.text = "m.mirazev@gmail.com"
+        textFieldEmail.text = "m.mirazev@gmail.com"
         textFieldEmail.attributedPlaceholder = NSAttributedString(
             string: "Email",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]

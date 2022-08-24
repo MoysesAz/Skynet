@@ -25,7 +25,9 @@ class MainController: UITabBarController {
         let publishController = UINavigationController(rootViewController: PublishController())
 //        let notificationController = UINavigationController(rootViewController: NotificationController())
         let userController = UINavigationController(rootViewController: UserController())
-        let logout = UINavigationController(rootViewController: Logout())
+        let logout = UINavigationController(rootViewController: Logout(backToLogin: {
+            self.navigationController?.popToRootViewController(animated: false)
+        }))
         self.setViewControllers([homeController, publishController, userController, logout], animated: true)
         self.tabBar.backgroundColor = .white
         self.tabBar.isTranslucent = false

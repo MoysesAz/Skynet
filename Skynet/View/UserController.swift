@@ -33,6 +33,7 @@ class UserController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let labelName = UILabel(frame: CGRect())
         labelName.text = "@Mirazev"
         labelName.textAlignment = NSTextAlignment.center;
+        labelName.textColor = .white
         labelName.translatesAutoresizingMaskIntoConstraints = false
         return labelName
     }()
@@ -40,6 +41,7 @@ class UserController: UIViewController, UICollectionViewDelegate, UICollectionVi
     lazy var labelEmail: UILabel = {
         let labelEmail = UILabel(frame: CGRect())
         labelEmail.text = "m.mirazev@gmail"
+        labelEmail.textColor = .white
         labelEmail.textAlignment = NSTextAlignment.center;
         labelEmail.translatesAutoresizingMaskIntoConstraints = false
         return labelEmail
@@ -53,6 +55,7 @@ class UserController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // tamanho da celula
 
         let collectionViewPosts: UICollectionView  = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionViewPosts.backgroundColor = .black
         collectionViewPosts.dataSource = self
         collectionViewPosts.delegate = self
         collectionViewPosts.register(CellPost.self, forCellWithReuseIdentifier: "collectionViewPosts")
@@ -65,7 +68,7 @@ class UserController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
+        view.backgroundColor = .black
         self.title = "User"
         view.addSubview(imageUser)
         view.addSubview(labelName)
@@ -81,18 +84,12 @@ class UserController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
             for i in posts {
                 if let user = await userViewModel.fetchUserByID(id: i.user_id) {
-                    
-
-
-
                     namesUsers.append("@" + user.name)
                 } else {
                     namesUsers.append(nil)
                 }
             }
             collectionViewPosts.reloadData()
-            view.addSubview(collectionViewPosts)
-            self.setUpConstraints()
         }
     }
 

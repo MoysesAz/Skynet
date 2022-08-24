@@ -146,6 +146,8 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Home"
+        view.addSubview(collectionViewPosts)
+        self.setUpConstraints()
     }
 
 
@@ -155,8 +157,6 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
             await getPosts()
             await getNamesUsers()
             collectionViewPosts.reloadData()
-            view.addSubview(collectionViewPosts)
-            self.setUpConstraints()
         }
 
     }

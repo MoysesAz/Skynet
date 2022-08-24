@@ -10,6 +10,7 @@ import UIKit
 
 class Logout: UIViewController {
     let userViewModel = UserViewModel()
+    let backToLogin : () -> Void
     
     lazy var buttonLogout: UIButton = {
         let buttonLogout = UIButton(type: .system)
@@ -22,6 +23,15 @@ class Logout: UIViewController {
                                                              )), for: .touchUpInside)
         return buttonLogout
     }()
+
+    init(backToLogin: @escaping ()->Void) {
+        self.backToLogin = backToLogin
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +63,7 @@ class Logout: UIViewController {
             
             let token = String(data: tokenData, encoding: .utf8)!
             await userViewModel.logout(token: token)
+            self.backToLogin()
             
         }
     }
